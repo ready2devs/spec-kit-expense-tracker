@@ -15,7 +15,7 @@ export function CategoryChart({ period }: { period: "all" | "month" | "week" }) 
 
   if (chartData.length === 0) {
     return (
-      <div className="bg-card text-card-foreground p-6 rounded-xl border border-border shadow-sm flex flex-col items-center justify-center min-h-[300px]">
+      <div className="h-full bg-card text-card-foreground p-6 rounded-xl border border-border shadow-sm flex flex-col items-center justify-center min-h-[300px]">
         <PieChartIcon className="w-12 h-12 text-gray-500 mb-4 opacity-50" />
         <p className="text-gray-400">No expenses recorded for this period.</p>
       </div>
@@ -23,12 +23,12 @@ export function CategoryChart({ period }: { period: "all" | "month" | "week" }) 
   }
 
   return (
-    <div className="bg-card text-card-foreground p-6 rounded-xl border border-border shadow-sm">
+    <div className="h-full bg-card text-card-foreground p-6 rounded-xl border border-border shadow-sm flex flex-col">
       <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
         <PieChartIcon className="w-5 h-5 text-primary" />
         Category Breakdown
       </h3>
-      <div className="h-[250px] w-full">
+      <div className="flex-1 w-full min-h-[250px]">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
