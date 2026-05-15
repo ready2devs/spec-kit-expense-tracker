@@ -14,15 +14,24 @@ export function ExpenseForm() {
   const [amount, setAmount] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [description, setDescription] = useState("");
+  const [date, setDate] = useState(() => new Date().toISOString().split("T")[0]);
   const [error, setError] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
+    // Create a date object. For simplicity, append time so Zod datetime validaiton passes.
+    let isoDate;
+    try {
+      isoDate = new Date(`${date}T12:00:00Z`).toISOString();
+    } catch {
+      isoDate = new Date().toISOString();
+    }
+
     const input = {
       amount: parseFloat(amount),
-      date: new Date().toISOString(),
+      date: isoDate,
       categoryId: categoryId || categories[0]?.id,
       description,
     };
@@ -39,6 +48,8 @@ export function ExpenseForm() {
 
     setAmount("");
     setDescription("");
+    // Keep the date as the user set it for fast consecutive inputs, or reset to today:
+    // setDate(new Date().toISOString().split("T")[0]);
   };
 
   return (
@@ -80,15 +91,28 @@ export function ExpenseForm() {
         </div>
       </div>
 
-      <div>
-        <label className="block text-sm mb-1 text-gray-400">Description (Optional)</label>
-        <input
-          type="text"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          className="w-full bg-background border border-border rounded-lg px-3 py-2 text-foreground focus:ring-2 focus:ring-primary outline-none transition-all"
-          placeholder="What was this for?"
-        />
+      <div className="flex flex-col sm:flex-row gap-4">
+        <div className="w-full sm:w-1/3">
+          <label className="block text-sm mb-1 text-gray-400">Date</label>
+          <input
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            className="w-full bg-background border border-border rounded-lg px-3 py-2 text-foreground focus:ring-2 focus:ring-primary outline-none transition-all"
+            required
+          />
+        </div>
+        
+        <div className="w-full sm:w-2/3">
+          <label className="block text-sm mb-1 text-gray-400">Description (Optional)</label>
+          <input
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="w-full bg-background border border-border rounded-lg px-3 py-2 text-foreground focus:ring-2 focus:ring-primary outline-none transition-all"
+            placeholder="What was this for?"
+          />
+        </div>
       </div>
 
       <button type="submit" className="mt-2 bg-primary text-primary-foreground font-medium py-2 px-4 rounded-lg hover:bg-primary/90 transition-colors">
