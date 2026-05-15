@@ -4,13 +4,13 @@
 We follow an MVP-first approach, prioritizing the recording and visualization of expenses. We use a modular architecture where business logic is centralized in `src/server` and persistence is abstracted into `src/lib/storage.ts`.
 
 ## Phase 1: Setup
-- [ ] T001 [P] Initialize directory structure: `src/server`, `src/features/expense-tracker`, `src/lib`
-- [ ] T002 Configure global styles and dark mode variables in `src/styles/globals.css` and `tailwind.config.ts`
+- [x] T001 [P] Initialize directory structure: `src/server`, `src/features/expense-tracker`, `src/lib`
+- [x] T002 Configure global styles and dark mode variables in `src/styles/globals.css` and `tailwind.config.ts`
 
 ## Phase 2: Foundational
-- [ ] T003 [P] Define TypeScript interfaces and Zod schemas in `src/server/schemas.ts`
-- [ ] T004 [P] Implement `localStorage` adapter and hook in `src/lib/storage.ts`
-- [ ] T005 [P] Create default category list and type definitions in `src/server/categories.ts`
+- [x] T003 [P] Define TypeScript interfaces and Zod schemas in `src/server/schemas.ts`
+- [x] T004 [P] Implement `localStorage` adapter and hook in `src/lib/storage.ts`
+- [x] T005 [P] Create default category list and type definitions in `src/server/categories.ts`
 
 ## Phase 3: [US1] Record an Expense (Priority: P1)
 - [ ] T006 [P] [US1] Create expense validation and creation logic in `src/server/expenses.ts`
